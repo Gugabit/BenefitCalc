@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Calculadora Beneficio</title>
+</head>
+<body>
+    <div class=" d-flex justify-content-center w-100 h-100">
+        <div class="wrapper d-flex justify-content-center mt-5 w-100">
+            <div class="d-flex flex-column mt-3 h-100">
+                <h2>Calculadora de Beneficio</h2>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text">R$</span>
+                    </div>
+                    <input type="text" class="form-control" id="valorEntrada" aria-label="Amount (to the nearest dollar)"> <!-- Entrada -->
+                    <div class="input-group-append">
+                        <span class="input-group-text">,00</span>
+                    </div>
+                </div>
+                <span id="errorBox" class="ml-5 m-0 p-0 d-block text-danger"></span>
+                <label class="btn btn-primary mt-5 align-self-center" onclick="calcula()">Calcular</label>
+                <div class="d-flex flex-wrap">
+                    <div class="d-flex flex-column">
+                        <span class="ml-2" >Entrada</span>
+                        <input class="border rounded m-1" disabled type="text" id="salarioEntrada">
+                
+                        <span class="ml-2" >Beneficio</span>
+                        <input class="border rounded m-1" disabled type="text" id="salarioBeneficio">
+                
+                        <span class="ml-2" >Uniao</span>
+                        <input class="border rounded m-1" disabled type="text" id="salarioUniao">
+                
+                        <span class="ml-2" >Empresa</span>
+                        <input class="border rounded m-1" disabled type="text" id="salarioEmpresa">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<script>
+    function calcula (salarioEntrada) {
+        console.log('entrou')
+        salarioEntrada = document.getElementById("valorEntrada").value
+        console.log(salarioEntrada, 'a')
+        if(salarioEntrada === ''){
+            console.log(salarioEntrada, 'b')
+            document.getElementById("errorBox").innerHTML = '<b>Obrigatório inserir valor de entrada.</b> '
+            return
+        }
+        document.getElementById("errorBox").innerHTML = ''
+
+        
+        if (salarioEntrada > 0 && salarioEntrada < 1599.62) {
+            salarioBeneficio = salarioEntrada * 0.8
+            if( salarioBeneficio < 1045){
+                salarioBeneficio = 1045
+            }
+            salarioUniao = 0.7 * salarioBeneficio
+            salarioEmpresa = 0.3 * salarioEntrada   
+        }
+        document.getElementById("salarioEntrada").value =  '  ' + salarioEntrada;
+        document.getElementById("salarioBeneficio").value = '  ' +  salarioBeneficio;
+        document.getElementById("salarioUniao").value =  '  ' + salarioUniao;
+        document.getElementById("salarioEmpresa").value = '  ' +  salarioEmpresa;
+    }
+
+</script>
+
+<style>
+    .wrapper{
+        width: 100%;
+        max-width: 800px;
+    }
+</style>
