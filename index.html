@@ -8,41 +8,92 @@
     <title>Calculadora Beneficio</title>
 </head>
 <body>
-    <div class=" d-flex justify-content-center w-100 h-100">
-        <div class="wrapper d-flex justify-content-center mt-5 w-100">
-            <div class="d-flex flex-column mt-3 h-100">
-                <h2>Calculadora de Beneficio</h2>
+    <div class=" d-flex justify-content-center w-100 p-2" style="height: 100vh;">
+        <div class="wrapper d-flex justify-content-center mt-4 w-100">
+            <div class="d-flex flex-column h-100 justify-content-center">
+                <h2 class="align-self-center">Calculadora de Beneficio</h2>
+                <h5 class="align-self-center">Preencha os campos abaixo com os valores recebidos nos ultimos três meses:</h5>
+                <h6 class="align-self-center">Favor não inserir ponto para indicar milhar.</h6>
+                <label for="valorEntrada3">Mês Um</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                    <span class="input-group-text">R$</span>
+                        <span class="input-group-text">R$</span>
                     </div>
-                    <input type="text" class="form-control" id="valorEntrada" aria-label="Amount (to the nearest dollar)"> <!-- Entrada -->
-                    <div class="input-group-append">
-                        <span class="input-group-text">,00</span>
+                    <input type="text" class="form-control" id="valorEntrada1" onkeyup="keyUpTest()"> <!-- Entrada -->
+                </div>
+                <label for="valorEntrada3">Mês Dois</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">R$</span>
                     </div>
+                    <input type="text" class="form-control" id="valorEntrada2"> <!-- Entrada -->
+                </div>
+                <label for="valorEntrada3">Mês Três</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">R$</span>
+                    </div>
+                    <input type="text" class="form-control" id="valorEntrada3"> <!-- Entrada -->
                 </div>
                 <span id="errorBox" class="ml-5 m-0 p-0 d-block text-danger"></span>
-                <label class="btn btn-primary mt-5 align-self-center" onclick="calcula()">Calcular</label>
-                <div class="d-flex flex-wrap">
-                    <div class="d-flex flex-column">
-                        <span class="ml-2" >Entrada</span>
-                        <input class="border rounded m-1" disabled type="text" id="salarioEntrada">
-                
+                <label class="btn btn-primary mt-5 align-self-center" id="submitBtn" onclick="calcula()">Calcular</label>
+                <div class="d-flex flex-wrap justify-content-center align-self-center">
+                    <div class="d-flex flex-column m-1">
+                        <span class="ml-2" >Média</span>
+                        <div class="input-group mb-2" style="width: 150px;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">R$</span>
+                            </div>
+                            <input type="text" class="form-control" disabled id="salarioMedia">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column m-1">
                         <span class="ml-2" >Beneficio</span>
-                        <input class="border rounded m-1" disabled type="text" id="salarioBeneficio">
-                
-                        <span class="ml-2" >Uniao</span>
-                        <input class="border rounded m-1" disabled type="text" id="salarioUniao">
-                
+                        <div class="input-group mb-2" style="width: 150px;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">R$</span>
+                            </div>
+                            <input type="text" class="form-control" disabled id="salarioBeneficio">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column m-1">
+                        <span class="ml-2" >União</span>
+                        <div class="input-group mb-2" style="width: 150px;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">R$</span>
+                            </div>
+                            <input type="text" class="form-control" disabled id="salarioUniao">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column m-1">
                         <span class="ml-2" >Empresa</span>
-                        <input class="border rounded m-1" disabled type="text" id="salarioEmpresa">
-                        
+                        <div class="input-group mb-2" style="width: 150px;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">R$</span>
+                            </div>
+                            <input type="text" class="form-control" disabled id="salarioEmpresa">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column m-1">
                         <span class="ml-2" >Total</span>
-                        <input class="border rounded m-1" disabled type="text" id="salarioEmpresa">
+                        <div class="input-group mb-2" style="width: 150px;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">R$</span>
+                            </div>
+                            <input type="text" class="form-control" disabled id="salarioTotal">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="footer d-flex justify-content-between p-4 text-light" style="background-color:dimgrey;">
+        <span>Larissa Meriely G. Jorge</span>
+        <span>Por <a href="http://gugabit.com" target="_blank">Gustavo B.</a></span>
+    </div>
+    <div class="d-flex flex-column h-100 justify-content-center m-3">
+        <h2 class="align-self-center">Detalhamento do cálculo</h2>
+        <div id="detalhamento" class="text-center text-monospace">Efetue um cálculo para visualizar o detalhamento.</div>
     </div>
 
 
@@ -57,35 +108,98 @@
 </html>
 
 <script>
-    function calcula (salarioEntrada) {
-        console.log('entrou')
-        salarioEntrada = document.getElementById("valorEntrada").value
-        console.log(salarioEntrada, 'a')
-        if(salarioEntrada === ''){
-            console.log(salarioEntrada, 'b')
-            document.getElementById("errorBox").innerHTML = '<b>Obrigatório inserir valor de entrada.</b> '
+    
+    campoEntrada1 = document.getElementById("valorEntrada1")
+    campoEntrada2 = document.getElementById("valorEntrada2")
+    campoEntrada3 = document.getElementById("valorEntrada3")
+
+    campoEntrada1.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            calcula()
+        }
+    })
+
+    campoEntrada2.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            calcula()
+        }
+    })
+
+    campoEntrada3.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            calcula()
+        }
+    })
+
+    function calcula () {
+        salarioEntrada1 = campoEntrada1.value.replace(/,/g, '.')
+        salarioEntrada2 = campoEntrada2.value.replace(/,/g, '.')
+        salarioEntrada3 = campoEntrada3.value.replace(/,/g, '.')
+
+
+        if(salarioEntrada1 === '' || salarioEntrada2 === '' || salarioEntrada3 === ''){
+            document.getElementById("errorBox").innerHTML = '<b>Obrigatório informar os três valores de entrada.</b> '
             return
         }
         document.getElementById("errorBox").innerHTML = ''
 
+        somaValores = (salarioEntrada1 * 1) + (salarioEntrada2 * 1)  + (salarioEntrada3 * 1)
+        salarioMedia = somaValores / 3
         
-        if (salarioEntrada > 0 && salarioEntrada < 1599.62) {
-            salarioBeneficio = salarioEntrada * 0.8
+        if (salarioMedia > 0 && salarioMedia < 1599.62) {
+            salarioBeneficio = salarioMedia * 0.8
+            contaSalarioBeneficio = `Valor Benefício = ${salarioMedia.toFixed(2)} * 0.8 = ${salarioBeneficio.toFixed(2)}`
             if( salarioBeneficio < 1045){
                 salarioBeneficio = 1045
+                contaSalarioBeneficio += `<br>Valor menor que R$ 1045.00, portanto Benefício = R$ 1045.00`
             }
-            salarioUniao = 0.7 * salarioBeneficio
-            salarioEmpresa = 0.3 * salarioEntrada   
         }
-        document.getElementById("salarioEntrada").value =  '  ' + salarioEntrada || ''
-        document.getElementById("salarioBeneficio").value = '  ' +  salarioBeneficio || ''
-        document.getElementById("salarioUniao").value =  '  ' + salarioUniao || ''
-        document.getElementById("salarioEmpresa").value = '  ' +  salarioEmpresa || ''
+
+        else if (salarioMedia >= 1599.62 && salarioMedia <= 2666.29) {
+            salarioBeneficio = (((salarioMedia - 1599.61) * 0.5) + 1279.69)
+            contaSalarioBeneficio = `<br>Valor Benefício = (${salarioMedia.toFixed(2)} - 1599.61) * 0.5 + 1279.69 = ${salarioBeneficio.toFixed(2)}`
+        }
+
+        else if (salarioMedia > 2666.29) {
+            salarioBeneficio = 1813.03
+            contaSalarioBeneficio = `Média maior que R$ 2666.29, portanto Benefício = R$ 1813.03`
+        }
+        
+        else {
+            document.getElementById("errorBox").innerHTML = '<b>O valor informado é inválido. Valores negativos ou com ponto não são aceitos.</b> '
+            return
+        }
+
+        salarioUniao = 0.7 * salarioBeneficio
+        salarioEmpresa = 0.3 * salarioMedia
+        salarioTotal = salarioEmpresa + salarioUniao
+
+        document.getElementById("salarioMedia").value = salarioMedia.toFixed(2)
+        document.getElementById("salarioBeneficio").value = salarioBeneficio.toFixed(2)
+        document.getElementById("salarioUniao").value = salarioUniao.toFixed(2)
+        document.getElementById("salarioEmpresa").value = salarioEmpresa.toFixed(2)
+        document.getElementById("salarioTotal").value =  salarioTotal.toFixed(2)
+
+        document.getElementById("detalhamento").innerHTML = ` <br>
+            <span class="m-3 d-block"> Soma dos valores = ${salarioEntrada1} + ${salarioEntrada2}  + ${salarioEntrada3} = ${somaValores.toFixed(2)} <br> </span>
+            <span class="m-3 d-block"> Média = ${somaValores.toFixed(2)} / 3 = ${salarioMedia.toFixed(2)}<br> </span>
+            <span class="m-3 d-block"> ${contaSalarioBeneficio} <br> </span>
+            <span class="m-3 d-block"> União = ${salarioBeneficio.toFixed(2)} * 0.7 = ${salarioUniao.toFixed(2)} <br> </span>
+            <span class="m-3 d-block"> Empresa = ${salarioMedia.toFixed(2)} * 0.3 = ${salarioEmpresa.toFixed(2)} <br> </span>
+            <span class="m-3 d-block"> Total = ${salarioUniao.toFixed(2)} + ${salarioEmpresa.toFixed(2)} = ${salarioTotal.toFixed(2)} <br> </span>
+       `
     }
 
 </script>
 
 <style>
+    a {
+        color:lawngreen;
+    }
+
     .wrapper{
         width: 100%;
         max-width: 800px;
