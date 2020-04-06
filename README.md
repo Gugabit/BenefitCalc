@@ -6,4 +6,8 @@ pelo SARS Covid-19.
 
 Sinta-se livre para modificar e re-utilizar.
 
-Gustavo B.
+
+
+MIT License
+
+Copyright (c) 2020 Gustavo B.
